@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Screen-reader only (Tailwind includes sr-only but just in case) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Star ratings — using background-image to avoid WAVE contrast checks */
+.star-filled,
+.star-empty {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+span > .star-filled,
+span > .star-empty {
+  width: 14px;
+  height: 14px;
+}
+
+.star-filled {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='10,1 12.6,7.2 19.5,7.6 14.2,12 15.8,18.8 10,15.4 4.2,18.8 5.8,12 0.5,7.6 7.4,7.2' fill='%23d97706' stroke='%23b45309' stroke-width='0.5'/%3E%3C/svg%3E");
+}
+
+.star-empty {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='10,1 12.6,7.2 19.5,7.6 14.2,12 15.8,18.8 10,15.4 4.2,18.8 5.8,12 0.5,7.6 7.4,7.2' fill='%23f3f4f6' stroke='%236b7280' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+/* Custom styles */
+.expert-card {
+  transition: box-shadow 0.15s, opacity 0.15s;
+}
+
+[data-drop-zone].drop-highlight {
+  outline: 2px dashed #93c5fd;
+  outline-offset: 2px;
+}
+
+[data-drop-zone].drop-active {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  background-color: #eff6ff !important;
+}

@@ -1,0 +1,11 @@
+CC,Name,Member,Notes,DI,FE,BE,New,DI_Pref,FE_Pref,BE_Pref
+AU,James Thornton,Australia,,5,4,3,N,Y,Y,M
+BR,Maria Santos,Brazil,,3,5,4,Y,M,Y,Y
+DE,Lukas Weber,Germany,,4,3,5,N,Y,M,Y
+FR,Sophie Martin,France,,5,5,4,N,Y,Y,Y
+JP,Kenji Yamamoto,Japan,,2,5,5,N,N,Y,Y
+KR,Yuna Park,Korea Republic of,,4,4,3,Y,Y,Y,N
+MX,Carlos Rivera,Mexico,,3,3,4,N,Observer,Observer,Observer
+NL,Eva de Vries,Netherlands,,5,2,4,Y,Y,N,Y
+SG,Wei Lin Tan,Singapore,,4,4,5,N,Y,M,Y
+UK,Val Adamescu,United Kingdom,,5,5,5,N,Y,Y,Y
