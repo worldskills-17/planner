@@ -3,7 +3,8 @@
  * Rows = experts, Columns = sessions, Cells = team/floor/free.
  */
 import store from '../data/store.js';
-import { flagImg } from './components.js';
+import { flagImg, showToast } from './components.js';
+import { generateSheetsSummary } from '../data/exporter.js';
 
 let _unsubscribers = [];
 let _sortMode = 'country'; // 'country' or a session key like 'C1-PM'
@@ -26,6 +27,8 @@ export function render(container) {
       <div class="px-4 py-3 border-b border-gray-200 bg-gray-50 flex items-center justify-between">
         <h1 class="text-2xl font-bold">Overview</h1>
         <div class="flex items-center gap-2">
+          <button id="overview-copy" class="px-3 py-1.5 text-sm bg-gray-100 rounded-lg hover:bg-gray-200" title="Copy a plain-text allocation summary to the clipboard">Copy Summary</button>
+          <span class="w-px h-5 bg-gray-300"></span>
           <span class="text-sm text-gray-500">Sort by:</span>
           <select id="overview-sort" class="text-sm border border-gray-300 rounded-lg px-2 py-1" aria-label="Sort overview by">
             <option value="country">Country</option>
@@ -41,6 +44,25 @@ export function render(container) {
   container.querySelector('#overview-sort').addEventListener('change', (e) => {
     _sortMode = e.target.value;
     renderTable(container, sessionKeys);
+  });
+
+  container.querySelector('#overview-copy').addEventListener('click', async () => {
+    const text = generateSheetsSummary();
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast('Allocation summary copied to clipboard', 'success');
+    } catch (err) {
+      // Clipboard API can fail on insecure origins (e.g. file://) — fall back to a textarea copy
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      ta.remove();
+      showToast(ok ? 'Allocation summary copied to clipboard' : 'Copy failed — clipboard unavailable', ok ? 'success' : 'error', ok ? 3000 : 5000);
+    }
   });
 
   renderTable(container, sessionKeys);
